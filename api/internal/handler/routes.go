@@ -4,24 +4,29 @@ package handler
 import (
 	"net/http"
 
-	datasync "filetool/api/internal/handler/datasync"
+	chat "filetool/api/internal/handler/chat"
 	"filetool/api/internal/svc"
 
 	"github.com/zeromicro/go-zero/rest"
 )
 
-func RegisterHandlers(engine *rest.Server, serverCtx *svc.ServiceContext) {
-	engine.AddRoutes(
+func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
+	server.AddRoutes(
 		[]rest.Route{
 			{
 				Method:  http.MethodPost,
-				Path:    "/api/v1/sync/ping",
-				Handler: datasync.SyncPingHandler(serverCtx),
+				Path:    "/api/filetool/chat/add",
+				Handler: chat.ChatRecordAddHandler(serverCtx),
 			},
 			{
 				Method:  http.MethodPost,
-				Path:    "/api/1.0/middle/dw/sync/setHash",
-				Handler: datasync.HashSetHandler(serverCtx),
+				Path:    "/api/filetool/chat/del",
+				Handler: chat.ChatRecordDelHandler(serverCtx),
+			},
+			{
+				Method:  http.MethodPost,
+				Path:    "/api/filetool/chat/list",
+				Handler: chat.ChatRecordListHandler(serverCtx),
 			},
 		},
 	)

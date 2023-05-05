@@ -1,1 +1,1 @@
-goctl api go -api doc/rdatasync.api -dir api
+goctl api go -api doc/filetool.api -dir api

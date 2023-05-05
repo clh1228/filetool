@@ -1,0 +1,76 @@
+info(
+	title: "文件操作工具服务"		// TODO: add title
+	desc: "文件操作工具服务"			// TODO: add description
+	author: "chenlinhua"
+	email: "chenlinhua@cyg.com"
+)
+
+type (
+	// 新增记录
+	ChatRecordAddReq {
+		Title      string `json:"title"`
+		ChatRecord string `json:"chatRecord"`
+		UserName   string `json:"userName,optional"`
+	}
+
+	ChatRecordAddResp {
+		Success string `json:"success"`
+		Errcode string `json:"errorCode"`
+		ErrMsg  string `json:"errorMessage"`
+	}
+
+	// 删除记录
+	ChatRecordDelReq {
+		Id string `json:"id"`
+	}
+
+	ChatRecordDelResp {
+		Success string `json:"success"`
+		Errcode string `json:"errorCode"`
+		ErrMsg  string `json:"errorMessage"`
+	}
+
+	// 获取所有记录通过翻页形式
+	ChatRecordInfo {
+		Id         string `json:"id"`
+		Title      string `json:"title"`
+		ChatRecord string `json:"chatRecord"`
+		UserName   string `json:"userName"`
+		CreateBy   string `json:"createBy"`
+		UpdateBy   string `json:"updateBy"`
+		CreatedAt  string `json:"createdAt"`
+		UpdatedAt  string `json:"updatedAt"`
+	}
+
+	ChatRecordListReq {
+		Title string `json:"title,optional"`
+		Page  int    `json:"page"`
+		Limit int    `json:"limit"`
+	}
+
+	// 设置实时值响应
+	ChatRecordListResp {
+		Success  string           `json:"success"`
+		Errcode  string           `json:"errorCode"`
+		ErrMsg   string           `json:"errorMessage"`
+		Data     []ChatRecordInfo `json:"data"`
+		Current  int              `json:"current"`
+		PageSize int              `json:"pageSize"`
+		Total    int              `json:"total"`
+	}
+)
+
+@server(
+	group: chat
+)
+
+service chat-api {
+	@handler chatRecordAdd
+	post /api/filetool/chat/add (ChatRecordAddReq) returns (ChatRecordAddResp)
+	
+	@handler chatRecordDel
+	post /api/filetool/chat/del (ChatRecordDelReq) returns (ChatRecordDelResp)
+	
+	@handler chatRecordList
+	post /api/filetool/chat/list (ChatRecordListReq) returns (ChatRecordListResp)
+}
