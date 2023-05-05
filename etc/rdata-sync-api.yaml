@@ -1,0 +1,21 @@
+Name: toproxy-api
+Host: 0.0.0.0
+Port: 8895
+
+# P3000中台服务配置
+P3000:
+  Host: 127.0.0.1
+  Port: 8808
+
+# P3000 redis配置
+P3000Redis:
+  Host: 127.0.0.1
+  Port: 30003
+  Pwd: D8858848FDB1ECC1625B73F59F21B2EAD6467E367B499F4FD179A5A3270BFD00
+  DB: 0
+
+Message:
+  # 消息服务器ip
+  Host: "10.7.3.24"
+  #消息服务器端口
+  Port: "30002"
