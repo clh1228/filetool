@@ -10,10 +10,11 @@ import (
 )
 
 type ServiceContext struct {
-	Db             *gorm.DB
-	Config         config.Config
-	P3000Sync      *p3000.P3000Conn
-	TGormUserModel *models.TGormCyUserModel
+	Db                     *gorm.DB
+	Config                 config.Config
+	P3000Sync              *p3000.P3000Conn
+	TGormUserModel         *models.TGormCyUserModel
+	TGormCyChatRecordModel *models.TGormCyChatRecordModel
 }
 
 func NewServiceContext(c config.Config) *ServiceContext {
@@ -23,9 +24,10 @@ func NewServiceContext(c config.Config) *ServiceContext {
 	db := database.GetDataBase()
 
 	return &ServiceContext{
-		Db:             db,
-		Config:         c,
-		P3000Sync:      p3000Conn,
-		TGormUserModel: models.NewTGormCyUserModel(db),
+		Db:                     db,
+		Config:                 c,
+		P3000Sync:              p3000Conn,
+		TGormUserModel:         models.NewTGormCyUserModel(db),
+		TGormCyChatRecordModel: models.NewTGormCyChatRecordModel(db),
 	}
 }
