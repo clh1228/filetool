@@ -28,6 +28,11 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 				Path:    "/api/filetool/chat/list",
 				Handler: chat.ChatRecordListHandler(serverCtx),
 			},
+			{
+				Method:  http.MethodPost,
+				Path:    "/api/filetool/chat/update",
+				Handler: chat.ChatRecordUpdateHandler(serverCtx),
+			},
 		},
 	)
 }

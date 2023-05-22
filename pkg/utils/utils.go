@@ -50,6 +50,15 @@ func GetTimeNowStr() string {
 	return time.Now().Format("2006-01-02 15:04:05")
 }
 
+// FmtTime
+//
+//	@Description: 将传入的time.Time转换成`2006-01-02 15:04:05`的字符串格式
+//	@param t 待格式化的时间
+//	@return string `2006-01-02 15:04:05`样式的时间字符串
+func FmtTime(t time.Time) string {
+	return t.Format("2006-01-02 15:04:05")
+}
+
 func GetJsonStrByStruct(req interface{}) string {
 	byteArray, err := json.MarshalIndent(req, " ", " ")
 	if err != nil {

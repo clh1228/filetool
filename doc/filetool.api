@@ -5,6 +5,24 @@ info(
 	email: "chenlinhua@cyg.com"
 )
 
+@server(
+	group: chat
+)
+
+service chat-api {
+	@handler chatRecordAdd
+	post /api/filetool/chat/add (ChatRecordAddReq) returns (ChatRecordAddResp)
+	
+	@handler chatRecordDel
+	post /api/filetool/chat/del (ChatRecordDelReq) returns (ChatRecordDelResp)
+	
+	@handler chatRecordList
+	post /api/filetool/chat/list (ChatRecordListReq) returns (ChatRecordListResp)
+	
+	@handler chatRecordUpdate
+	post /api/filetool/chat/update (ChatRecordUpdateReq) returns (ChatRecordUpdateResp)
+}
+
 type (
 	// 新增记录
 	ChatRecordAddReq {
@@ -36,10 +54,10 @@ type (
 		Title      string `json:"title"`
 		ChatRecord string `json:"chatRecord"`
 		UserName   string `json:"userName"`
-		CreateBy   string `json:"createBy"`
-		UpdateBy   string `json:"updateBy"`
-		CreatedAt  string `json:"createdAt"`
-		UpdatedAt  string `json:"updatedAt"`
+		CreateBy   string `json:"createBy,optional"`
+		UpdateBy   string `json:"updateBy,optional"`
+		CreatedAt  string `json:"createdAt,optional"`
+		UpdatedAt  string `json:"updatedAt,optional"`
 	}
 
 	ChatRecordListReq {
@@ -48,7 +66,6 @@ type (
 		Limit int    `json:"limit"`
 	}
 
-	// 设置实时值响应
 	ChatRecordListResp {
 		Success  string           `json:"success"`
 		Errcode  string           `json:"errorCode"`
@@ -58,19 +75,16 @@ type (
 		PageSize int              `json:"pageSize"`
 		Total    int              `json:"total"`
 	}
-)
 
-@server(
-	group: chat
-)
+	// 更新聊天记录
+	ChatRecordUpdateReq {
+		AuthKey string `json:"authKey"`
+		ChatRecordInfo
+	}
 
-service chat-api {
-	@handler chatRecordAdd
-	post /api/filetool/chat/add (ChatRecordAddReq) returns (ChatRecordAddResp)
-	
-	@handler chatRecordDel
-	post /api/filetool/chat/del (ChatRecordDelReq) returns (ChatRecordDelResp)
-	
-	@handler chatRecordList
-	post /api/filetool/chat/list (ChatRecordListReq) returns (ChatRecordListResp)
-}
+	ChatRecordUpdateResp {
+		Success string `json:"success"`
+		Errcode string `json:"errorCode"`
+		ErrMsg  string `json:"errorMessage"`
+	}
+)

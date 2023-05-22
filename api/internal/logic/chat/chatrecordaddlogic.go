@@ -46,5 +46,5 @@ func (l *ChatRecordAddLogic) ChatRecordAdd(req *types.ChatRecordAddReq) (resp *t
 
 	resp.Success = "true"
 	resp.Errcode = fmt.Sprint(errpkg.Ok)
-	return
+	return resp, nil
 }

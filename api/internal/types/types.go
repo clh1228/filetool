@@ -28,10 +28,10 @@ type ChatRecordInfo struct {
 	Title      string `json:"title"`
 	ChatRecord string `json:"chatRecord"`
 	UserName   string `json:"userName"`
-	CreateBy   string `json:"createBy"`
-	UpdateBy   string `json:"updateBy"`
-	CreatedAt  string `json:"createdAt"`
-	UpdatedAt  string `json:"updatedAt"`
+	CreateBy   string `json:"createBy,optional"`
+	UpdateBy   string `json:"updateBy,optional"`
+	CreatedAt  string `json:"createdAt,optional"`
+	UpdatedAt  string `json:"updatedAt,optional"`
 }
 
 type ChatRecordListReq struct {
@@ -48,4 +48,15 @@ type ChatRecordListResp struct {
 	Current  int              `json:"current"`
 	PageSize int              `json:"pageSize"`
 	Total    int              `json:"total"`
+}
+
+type ChatRecordUpdateReq struct {
+	AuthKey string `json:"authKey"`
+	ChatRecordInfo
+}
+
+type ChatRecordUpdateResp struct {
+	Success string `json:"success"`
+	Errcode string `json:"errorCode"`
+	ErrMsg  string `json:"errorMessage"`
 }
